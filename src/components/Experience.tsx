@@ -4,8 +4,10 @@ import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, Building } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const Experience = () => {
+  const { t } = useLanguage()
   const experiences = [
     {
       id: 1,
@@ -88,10 +90,10 @@ const Experience = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Work <span className="gradient-text">Experience</span>
+            {t('experience.title').split(' ')[0]} <span className="gradient-text">{t('experience.title').split(' ')[1]}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            My professional journey and the experiences that have shaped my development career.
+            {t('experience.subtitle')}
           </p>
         </motion.div>
 
@@ -125,7 +127,7 @@ const Experience = () => {
                     </div>
                     {experience.current && (
                       <Badge variant="default" className="w-fit">
-                        Current
+                        {t('experience.present')}
                       </Badge>
                     )}
                   </div>
@@ -149,7 +151,7 @@ const Experience = () => {
                 <CardContent className="space-y-4">
                   {/* Achievements */}
                   <div>
-                    <h4 className="font-semibold mb-2">Key Achievements:</h4>
+                    <h4 className="font-semibold mb-2">{t('experience.achievements')}:</h4>
                     <ul className="space-y-1">
                       {experience.achievements.map((achievement, achievementIndex) => (
                         <li key={achievementIndex} className="text-sm text-muted-foreground flex items-start gap-2">

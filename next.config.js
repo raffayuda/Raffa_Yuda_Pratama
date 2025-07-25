@@ -1,14 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {
-    resolveExtensions: [
-      '.tsx',
-      '.ts',
-      '.jsx',
-      '.js',
-      '.mjs',
-      '.json',
-    ],
+  experimental: {
+    turbo: {
+      resolveExtensions: [
+        '.tsx',
+        '.ts',
+        '.jsx',
+        '.js',
+        '.mjs',
+        '.json',
+      ],
+    },
   },
   images: {
     domains: ['api.placeholder.com', 'images.unsplash.com', 'picsum.photos'],

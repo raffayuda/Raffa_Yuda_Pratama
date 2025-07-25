@@ -3,11 +3,14 @@
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const Skills = () => {
+  const { t } = useLanguage()
+  
   const skillCategories = [
     {
-      title: "Frontend Development",
+      title: t('skills.frontend'),
       icon: "🎨",
       skills: [
         { name: "React", level: 95 },
@@ -19,7 +22,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Backend Development",
+      title: t('skills.backend'),
       icon: "⚙️",
       skills: [
         { name: "Node.js", level: 85 },
@@ -31,7 +34,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Tools & Others",
+      title: t('skills.tools'),
       icon: "🔧",
       skills: [
         { name: "Git", level: 90 },
@@ -61,7 +64,7 @@ const Skills = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            My <span className="gradient-text">Skills</span>
+            {t('skills.title').split(' ')[0]} <span className="gradient-text">{t('skills.title').split(' ')[1]}</span>
           </h2>
           {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Technologies and tools I&apos;ve mastered to bring ideas to life.

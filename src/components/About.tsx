@@ -4,31 +4,33 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Code, Palette, Zap, Heart } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const About = () => {
+  const { t } = useLanguage()
   const stats = [
-    { icon: Code, label: "Projects Completed", value: "50+", color: "text-blue-500" },
-    { icon: Palette, label: "Happy Clients", value: "30+", color: "text-purple-500" },
-    { icon: Zap, label: "Years Experience", value: "5+", color: "text-green-500" },
-    { icon: Heart, label: "Cups of Coffee", value: "∞", color: "text-red-500" },
+    { icon: Code, label: t('about.stats.projectsCompleted'), value: "50+", color: "text-blue-500" },
+    { icon: Palette, label: t('about.stats.happyClients'), value: "30+", color: "text-purple-500" },
+    { icon: Zap, label: t('about.stats.yearsExperience'), value: "5+", color: "text-green-500" },
+    { icon: Heart, label: t('about.stats.cupsOfCoffee'), value: "∞", color: "text-red-500" },
   ]
 
   const values = [
     {
-      title: "Clean Code",
-      description: "I believe in writing maintainable, scalable, and well-documented code that stands the test of time."
+      title: t('about.values.cleanCode.title'),
+      description: t('about.values.cleanCode.description')
     },
     {
-      title: "User-Centered Design",
-      description: "Every decision I make prioritizes the end user's experience and accessibility."
+      title: t('about.values.userCentered.title'),
+      description: t('about.values.userCentered.description')
     },
     {
-      title: "Continuous Learning",
-      description: "Technology evolves rapidly, and I'm committed to staying current with the latest trends and best practices."
+      title: t('about.values.continuousLearning.title'),
+      description: t('about.values.continuousLearning.description')
     },
     {
-      title: "Collaboration",
-      description: "Great products are built by great teams. I thrive in collaborative environments."
+      title: t('about.values.collaboration.title'),
+      description: t('about.values.collaboration.description')
     }
   ]
 
@@ -43,10 +45,10 @@ const About = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            About <span className="gradient-text">Me</span>
+            {t('about.title').split(' ')[0]} <span className="gradient-text">{t('about.title').split(' ')[1]}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            I&apos;m a passionate developer who loves creating digital experiences that make a difference.
+            {t('about.subtitle')}
           </p>
         </motion.div>
 
@@ -58,24 +60,21 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-semibold mb-6">My Story</h3>
+            <h3 className="text-2xl font-semibold mb-6">{t('about.myStory')}</h3>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                Hi! I&apos;m John, a full-stack developer based in Indonesia. My journey into tech started 
-                5 years ago when I discovered the magic of turning ideas into interactive digital experiences.
+                {t('about.story1')}
               </p>
               <p>
-                I specialize in modern web technologies including React, Next.js, TypeScript, and Node.js. 
-                I&apos;m passionate about creating beautiful, performant applications that solve real-world problems.
+                {t('about.story2')}
               </p>
               <p>
-                When I&apos;m not coding, you can find me exploring new technologies, contributing to open source, 
-                or enjoying a good cup of coffee while brainstorming the next big idea.
+                {t('about.story3')}
               </p>
             </div>
 
             <div className="mt-6 space-y-2">
-              <h4 className="font-semibold text-lg">Currently focused on:</h4>
+              <h4 className="font-semibold text-lg">{t('about.currentlyFocused')}</h4>
               <div className="flex flex-wrap gap-2">
                 {["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "Framer Motion"].map((tech) => (
                   <Badge key={tech} variant="secondary">
@@ -121,7 +120,7 @@ const About = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl font-semibold text-center mb-8">What I Value</h3>
+          <h3 className="text-2xl font-semibold text-center mb-8">{t('about.whatIValue')}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
               <motion.div

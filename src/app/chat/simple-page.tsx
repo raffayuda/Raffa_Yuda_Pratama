@@ -120,10 +120,8 @@ export default function SimpleChatPage() {
       if (response.ok) {
         const rooms = await response.json()
         setChatRooms(rooms)
-        
         // Set first room as default only if no room is selected and no saved room
         const savedRoom = localStorage.getItem('chat-active-room')
-        
         if (rooms.length > 0 && !activeRoom && !savedRoom) {
           setActiveRoom(rooms[0].id)
           localStorage.setItem('chat-active-room', rooms[0].id)
@@ -135,8 +133,6 @@ export default function SimpleChatPage() {
           setActiveRoom(rooms[0].id)
           localStorage.setItem('chat-active-room', rooms[0].id)
         }
-      } else {
-        console.error('Failed to fetch rooms, status:', response.status)
       }
     } catch (error) {
       console.error('Error fetching chat rooms:', error)

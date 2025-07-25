@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github, Eye } from "lucide-react"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const Projects = () => {
+  const { t } = useLanguage()
   const projects = [
     {
       id: 1,
@@ -85,10 +87,10 @@ const Projects = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Featured <span className="gradient-text">Projects</span>
+            {t('projects.title').split(' ')[0]} <span className="gradient-text">{t('projects.title').split(' ')[1]}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my recent work and side projects that demonstrate my skills and passion for development.
+            {t('projects.subtitle')}
           </p>
         </motion.div>
 
@@ -116,13 +118,13 @@ const Projects = () => {
                       <Button size="sm" variant="secondary" asChild>
                         <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                           <Eye className="h-4 w-4 mr-2" />
-                          Live Demo
+                          {t('projects.viewProject')}
                         </a>
                       </Button>
                       <Button size="sm" variant="outline" asChild>
                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                           <Github className="h-4 w-4 mr-2" />
-                          Code
+                          {t('projects.viewCode')}
                         </a>
                       </Button>
                     </div>
@@ -153,13 +155,13 @@ const Projects = () => {
                   <Button size="sm" asChild className="flex-1">
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      Live Demo
+                      {t('projects.viewProject')}
                     </a>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="flex-1">
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
-                      View Code
+                      {t('projects.viewCode')}
                     </a>
                   </Button>
                 </CardFooter>
@@ -175,7 +177,7 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl font-semibold text-center mb-8">Other Projects</h3>
+          <h3 className="text-2xl font-semibold text-center mb-8">{t('projects.otherProjects')}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {otherProjects.map((project, index) => (
               <motion.div

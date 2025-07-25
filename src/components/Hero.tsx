@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react"
 import { motion } from "framer-motion"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const Hero = () => {
   const [mounted, setMounted] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     setMounted(true)
@@ -42,7 +44,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h2 className="text-lg text-primary font-semibold mb-4">
-                Hello, I&apos;m
+                {t('hero.greeting')}
               </h2>
             </motion.div>
 
@@ -61,7 +63,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <h3 className="text-xl md:text-2xl text-muted-foreground mb-6">
-                Full Stack Developer & UI/UX Designer
+                {t('hero.title')}
               </h3>
             </motion.div>
 
@@ -71,8 +73,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              I create beautiful, functional web applications with modern technologies. 
-              Passionate about clean code, great user experiences, and solving complex problems.
+              {t('hero.subtitle')}
             </motion.p>
 
             <motion.div 
@@ -82,13 +83,13 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 1 }}
             >
               <Button size="lg" className="group" onClick={scrollToAbout}>
-                Get Started
+                {t('hero.cta')}
                 <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
               </Button>
               
               <Button variant="outline" size="lg" className="group">
                 <Download className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
-                Download CV
+                {t('hero.downloadCV')}
               </Button>
             </motion.div>
 

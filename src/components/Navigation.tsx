@@ -4,11 +4,14 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Menu, X, Github, Linkedin, Mail, MessageCircle } from "lucide-react"
+import { Menu, X, Github, Linkedin, Mail, MessageCircle, Music } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { LanguageToggle } from "@/components/language-toggle"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,14 +24,14 @@ const Navigation = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
-  const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-  ]
+  // const navItems = [
+  //   { name: t('nav.home'), href: "#home" },
+  //   { name: t('nav.about'), href: "#about" },
+  //   { name: t('nav.skills'), href: "#skills" },
+  //   { name: t('nav.projects'), href: "#projects" },
+  //   { name: t('nav.experience'), href: "#experience" },
+  //   { name: t('nav.contact'), href: "#contact" },
+  // ]
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -40,22 +43,11 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold gradient-text">
-            Portfolio
+            {t('nav.portfolio')}
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
+  
 
           {/* Social Links & Mobile Menu Button */}
           <div className="flex items-center space-x-4">
@@ -63,16 +55,27 @@ const Navigation = () => {
             <Button variant="outline" size="sm" asChild className="hidden md:flex">
               <Link href="/chat">
                 <MessageCircle className="h-4 w-4 mr-2" />
-                Live Chat
+                {t('nav.liveChat')}
+              </Link>
+            </Button>
+
+            {/* Music Button */}
+            <Button variant="outline" size="sm" asChild className="hidden md:flex">
+              <Link href="/music">
+                <Music className="h-4 w-4 mr-2" />
+                {t('nav.music')}
               </Link>
             </Button>
 
             {/* Admin Button */}
             <Button variant="ghost" size="sm" asChild className="hidden md:flex">
               <Link href="/admin">
-                Admin
+                {t('nav.admin')}
               </Link>
             </Button>
+            
+            {/* Language Toggle */}
+            <LanguageToggle />
             
             {/* Theme Toggle */}
             <ThemeToggle />
@@ -112,16 +115,6 @@ const Navigation = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background/95 backdrop-blur-md rounded-lg mt-2 border border-border">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 text-foreground hover:text-primary transition-colors duration-200 font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
               
               {/* Mobile Live Chat Link */}
               <Link
@@ -130,7 +123,17 @@ const Navigation = () => {
                 onClick={() => setIsOpen(false)}
               >
                 <MessageCircle className="h-4 w-4 mr-2" />
-                Live Chat
+                {t('nav.liveChat')}
+              </Link>
+
+              {/* Mobile Music Link */}
+              <Link
+                href="/music"
+                className="flex items-center px-3 py-2 text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                onClick={() => setIsOpen(false)}
+              >
+                <Music className="h-4 w-4 mr-2" />
+                {t('nav.music')}
               </Link>
 
               {/* Mobile Admin Link */}
@@ -139,7 +142,7 @@ const Navigation = () => {
                 className="block px-3 py-2 text-foreground hover:text-primary transition-colors duration-200 font-medium"
                 onClick={() => setIsOpen(false)}
               >
-                Admin
+                {t('nav.admin')}
               </Link>
               
               {/* Mobile Social Links */}

@@ -8,8 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const Contact = () => {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -108,10 +110,10 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Get In <span className="gradient-text">Touch</span>
+            {t('contact.title').split(' ')[0]} {t('contact.title').split(' ')[1]} <span className="gradient-text">{t('contact.title').split(' ')[2] || ''}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? Let&apos;s discuss how we can work together to bring your ideas to life.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -125,9 +127,9 @@ const Contact = () => {
           >
             <Card className="h-fit">
               <CardHeader>
-                <CardTitle>Send Message</CardTitle>
+                <CardTitle>{t('contact.send')}</CardTitle>
                 <CardDescription>
-                  Fill out the form below and I&apos;ll get back to you as soon as possible.
+                  {t('contact.subtitle')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -135,12 +137,12 @@ const Contact = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium">
-                        Name *
+                        {t('contact.name')} *
                       </label>
                       <Input
                         id="name"
                         name="name"
-                        placeholder="Your name"
+                        placeholder={t('contact.name')}
                         value={formData.name}
                         onChange={handleInputChange}
                         required
@@ -148,13 +150,13 @@ const Contact = () => {
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium">
-                        Email *
+                        {t('contact.email')} *
                       </label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="your.email@example.com"
+                        placeholder={t('contact.email')}
                         value={formData.email}
                         onChange={handleInputChange}
                         required
@@ -164,12 +166,12 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <label htmlFor="subject" className="text-sm font-medium">
-                      Subject *
+                      {t('contact.subject')} *
                     </label>
                     <Input
                       id="subject"
                       name="subject"
-                      placeholder="Project inquiry, collaboration, etc."
+                      placeholder={t('contact.subject')}
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
@@ -178,12 +180,12 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-medium">
-                      Message *
+                      {t('contact.message')} *
                     </label>
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Tell me about your project..."
+                      placeholder={t('contact.message')}
                       rows={6}
                       value={formData.message}
                       onChange={handleInputChange}
@@ -194,7 +196,7 @@ const Contact = () => {
                   {submitStatus === 'success' && (
                     <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
                       <p className="text-green-800 dark:text-green-200 text-sm">
-                        ✅ Message sent successfully! I&apos;ll get back to you soon.
+                        ✅ {t('contact.successMessage')}
                       </p>
                     </div>
                   )}
@@ -202,7 +204,7 @@ const Contact = () => {
                   {submitStatus === 'error' && (
                     <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
                       <p className="text-red-800 dark:text-red-200 text-sm">
-                        ❌ Failed to send message. Please try again or contact me directly.
+                        ❌ {t('contact.errorMessage')}
                       </p>
                     </div>
                   )}
@@ -215,12 +217,12 @@ const Contact = () => {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Sending...
+                        {t('contact.sending')}
                       </>
                     ) : (
                       <>
                         <Send className="h-4 w-4 mr-2" />
-                        Send Message
+                        {t('contact.send')}
                       </>
                     )}
                   </Button>
@@ -240,9 +242,9 @@ const Contact = () => {
             {/* Contact Info */}
             <Card>
               <CardHeader>
-                <CardTitle>Contact Information</CardTitle>
+                <CardTitle>{t('contact.info')}</CardTitle>
                 <CardDescription>
-                  Feel free to reach out through any of these channels.
+                  {t('contact.subtitle')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -273,9 +275,9 @@ const Contact = () => {
             {/* Social Links */}
             <Card>
               <CardHeader>
-                <CardTitle>Follow Me</CardTitle>
+                <CardTitle>{t('contact.social')}</CardTitle>
                 <CardDescription>
-                  Connect with me on social media and see my latest work.
+                  {t('contact.subtitle')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -303,7 +305,7 @@ const Contact = () => {
             {/* Availability */}
             <Card>
               <CardHeader>
-                <CardTitle>Availability</CardTitle>
+                <CardTitle>{t('contact.availability')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
