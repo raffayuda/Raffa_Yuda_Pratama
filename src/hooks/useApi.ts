@@ -43,7 +43,7 @@ export function useApi<T>(
     if (options.immediate) {
       fetchData()
     }
-  }, [url, options.immediate])
+  }, [url, options.immediate, fetchData])
 
   return {
     ...state,

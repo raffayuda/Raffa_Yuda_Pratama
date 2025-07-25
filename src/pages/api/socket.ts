@@ -12,7 +12,7 @@ export default async function ioHandler(
 ) {
   if (!res.socket.server.io) {
     const path = '/api/socket'
-    const httpServer: NetServer = res.socket.server as any
+    const httpServer = res.socket.server as unknown as NetServer
     const io = new ServerIO(httpServer, {
       path: path,
       addTrailingSlash: false,
