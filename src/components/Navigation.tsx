@@ -66,6 +66,13 @@ const Navigation = () => {
                 Live Chat
               </Link>
             </Button>
+
+            {/* Admin Button */}
+            <Button variant="ghost" size="sm" asChild className="hidden md:flex">
+              <Link href="/admin">
+                Admin
+              </Link>
+            </Button>
             
             {/* Theme Toggle */}
             <ThemeToggle />
@@ -124,6 +131,15 @@ const Navigation = () => {
               >
                 <MessageCircle className="h-4 w-4 mr-2" />
                 Live Chat
+              </Link>
+
+              {/* Mobile Admin Link */}
+              <Link
+                href="/admin"
+                className="block px-3 py-2 text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                onClick={() => setIsOpen(false)}
+              >
+                Admin
               </Link>
               
               {/* Mobile Social Links */}

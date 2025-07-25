@@ -9,9 +9,10 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
-import { Send, Users, MessageCircle, ArrowLeft, RefreshCw, LogOut } from "lucide-react"
+import { Send, Users, MessageCircle, ArrowLeft, RefreshCw, LogOut, Shield, Trash2 } from "lucide-react"
 import Link from "next/link"
 import toast, { Toaster } from 'react-hot-toast'
+import Cookies from 'js-cookie'
 
 interface Message {
   id: string
@@ -19,6 +20,7 @@ interface Message {
   username: string
   userEmail?: string
   createdAt: string
+  isAdmin?: boolean
 }
 
 interface ChatRoom {
@@ -39,8 +41,9 @@ export default function SimpleChatPage() {
   const [chatRooms, setChatRooms] = useState<ChatRoom[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
+  const [isAdmin, setIsAdmin] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const pollingRef = useRef<NodeJS.Timeout>()
+  const pollingRef = useRef<NodeJS.Timeout | null>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -64,8 +67,33 @@ export default function SimpleChatPage() {
     }
     if (savedIsJoined === 'true' && savedUsername) {
       setIsJoined(true)
+      // Check admin status if logged in
+      checkAdminStatus()
     }
   }, [])
+
+  // Check if user is admin
+  const checkAdminStatus = async () => {
+    const token = Cookies.get('admin-token')
+    if (token) {
+      try {
+        const response = await fetch('/api/admin/auth', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ action: 'verify', token }),
+        })
+
+        if (response.ok) {
+          setIsAdmin(true)
+          toast.success('Masuk sebagai admin!')
+        }
+      } catch (error) {
+        console.error('Admin verification failed:', error)
+      }
+    }
+  }
 
   useEffect(() => {
     scrollToBottom()
@@ -150,6 +178,10 @@ export default function SimpleChatPage() {
       localStorage.setItem('chat-is-joined', 'true')
       
       setIsJoined(true)
+      
+      // Check admin status after joining
+      checkAdminStatus()
+      
       toast.success(`Welcome ${username}! You've joined the chat.`)
     }
   }
@@ -168,6 +200,7 @@ export default function SimpleChatPage() {
     
     // Reset state
     setIsJoined(false)
+    setIsAdmin(false)
     setMessages([])
     setNewMessage("")
     setActiveRoom("")
@@ -188,7 +221,8 @@ export default function SimpleChatPage() {
               content: newMessage,
               username,
               userEmail,
-              roomId: activeRoom
+              roomId: activeRoom,
+              isAdmin: isAdmin
             }
           })
         })
@@ -216,6 +250,39 @@ export default function SimpleChatPage() {
     // Polling will automatically start fetching new room messages
   }
 
+  const deleteMessage = async (messageId: string) => {
+    if (!isAdmin) {
+      toast.error('Hanya admin yang dapat menghapus pesan')
+      return
+    }
+
+    try {
+      const token = Cookies.get('admin-token')
+      const response = await fetch('/api/admin/manage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'deleteMessage',
+          token,
+          messageId,
+        }),
+      })
+
+      if (response.ok) {
+        toast.success('Pesan berhasil dihapus')
+        fetchMessages() // Refresh messages
+      } else {
+        const data = await response.json()
+        toast.error(data.error || 'Gagal menghapus pesan')
+      }
+    } catch (error) {
+      console.error('Delete message error:', error)
+      toast.error('Terjadi kesalahan saat menghapus pesan')
+    }
+  }
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       if (!isJoined) {
@@ -227,7 +294,7 @@ export default function SimpleChatPage() {
   }
 
   if (!isJoined) {
-    const isReturningUser = localStorage.getItem('chat-username')
+    const isReturningUser = typeof window !== 'undefined' ? localStorage.getItem('chat-username') : null
     
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
@@ -353,7 +420,15 @@ export default function SimpleChatPage() {
                   <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
-                  <p className="font-medium text-gray-900 dark:text-white">{username}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium text-gray-900 dark:text-white">{username}</p>
+                    {isAdmin && (
+                      <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs">
+                        <Shield className="w-3 h-3 mr-1" />
+                        Admin
+                      </Badge>
+                    )}
+                  </div>
                   {userEmail && (
                     <p className="text-xs text-gray-500 dark:text-gray-400">{userEmail}</p>
                   )}
@@ -436,13 +511,30 @@ export default function SimpleChatPage() {
                         </AvatarFallback>
                       </Avatar>
                       <div className={`flex-1 ${message.username === username ? 'text-right' : ''}`}>
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className={`flex items-center gap-2 mb-1 ${message.username === username ? 'justify-end' : ''}`}>
                           <span className="text-sm font-medium text-gray-900 dark:text-white">
                             {message.username}
                           </span>
+                          {message.isAdmin && (
+                            <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs">
+                              <Shield className="w-3 h-3 mr-1" />
+                              Admin
+                            </Badge>
+                          )}
                           <span className="text-xs text-gray-500 dark:text-gray-400">
                             {new Date(message.createdAt).toLocaleTimeString()}
                           </span>
+                          {isAdmin && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => deleteMessage(message.id)}
+                              className="p-1 h-6 w-6 text-red-500 hover:text-red-700 hover:bg-red-50"
+                              title="Hapus pesan"
+                            >
+                              <Trash2 className="w-3 h-3" />
+                            </Button>
+                          )}
                         </div>
                         <div className={`inline-block p-3 rounded-lg max-w-xs lg:max-w-md ${
                           message.username === username 

@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 
     switch (action) {
       case 'sendMessage':
-        const { content, username, userEmail, roomId } = data
+        const { content, username, userEmail, roomId, isAdmin = false } = data
         
         // Get default room if not specified
         let targetRoomId = roomId
@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
             content,
             username,
             userEmail,
+            isAdmin,
             roomId: targetRoomId
           }
         })
