@@ -19,10 +19,8 @@ interface ChatRoom {
   name: string
   description: string | null
   isActive: boolean
-  createdAt: string
-  _count: {
-    messages: number
-  }
+  createdAt?: string
+  messageCount?: number
 }
 
 export default function AdminRoomsPage() {
@@ -77,11 +75,13 @@ export default function AdminRoomsPage() {
       const response = await fetch('/api/chat/rooms')
       if (response.ok) {
         const data = await response.json()
-        setRooms(data.rooms)
+        // API returns array directly, not { rooms: [...] }
+        setRooms(Array.isArray(data) ? data : [])
       }
     } catch (error) {
       console.error('Failed to load rooms:', error)
       toast.error('Gagal memuat data ruangan')
+      setRooms([]) // Set empty array on error
     }
   }
 
@@ -312,7 +312,7 @@ export default function AdminRoomsPage() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {rooms.map((room, index) => (
+          {Array.isArray(rooms) && rooms.map((room, index) => (
             <motion.div
               key={room.id}
               initial={{ opacity: 0, y: 20 }}
@@ -350,7 +350,7 @@ export default function AdminRoomsPage() {
                   <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
                     <div className="flex items-center space-x-1">
                       <MessageSquare className="w-4 h-4" />
-                      <span>{room._count.messages} pesan</span>
+                      <span>{room.messageCount || 0} pesan</span>
                     </div>
                     <div className="flex items-center space-x-1">
                       <div className={`w-2 h-2 rounded-full ${room.isActive ? 'bg-green-500' : 'bg-red-500'}`} />

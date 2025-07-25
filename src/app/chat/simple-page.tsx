@@ -120,8 +120,10 @@ export default function SimpleChatPage() {
       if (response.ok) {
         const rooms = await response.json()
         setChatRooms(rooms)
+        
         // Set first room as default only if no room is selected and no saved room
         const savedRoom = localStorage.getItem('chat-active-room')
+        
         if (rooms.length > 0 && !activeRoom && !savedRoom) {
           setActiveRoom(rooms[0].id)
           localStorage.setItem('chat-active-room', rooms[0].id)
@@ -133,6 +135,8 @@ export default function SimpleChatPage() {
           setActiveRoom(rooms[0].id)
           localStorage.setItem('chat-active-room', rooms[0].id)
         }
+      } else {
+        console.error('Failed to fetch rooms, status:', response.status)
       }
     } catch (error) {
       console.error('Error fetching chat rooms:', error)
@@ -376,7 +380,7 @@ export default function SimpleChatPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto h-screen flex flex-col lg:flex-row gap-4 p-4">
+      <div className="container mx-auto h-[100%] flex flex-col lg:flex-row gap-4 p-4">
         {/* Sidebar */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -447,7 +451,7 @@ export default function SimpleChatPage() {
               <CardTitle className="text-base">Chat Rooms</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-              <ScrollArea className="h-32">
+              <ScrollArea className="h-[200px] lg:h-[300px]">
                 <div className="space-y-1 p-4 pt-0">
                   {chatRooms.map((room) => (
                     <Button

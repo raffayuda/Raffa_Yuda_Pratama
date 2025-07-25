@@ -5,6 +5,7 @@ const prisma = new PrismaClient()
 
 export async function GET() {
   try {
+    console.log('API: Fetching chat rooms...')
     const rooms = await prisma.chatRoom.findMany({
       where: { isActive: true },
       include: {
@@ -15,6 +16,9 @@ export async function GET() {
       orderBy: { createdAt: 'asc' }
     })
 
+    console.log('API: Found rooms:', rooms.length)
+    console.log('API: Rooms data:', rooms.map(r => ({ id: r.id, name: r.name, isActive: r.isActive })))
+
     const roomsWithCount = rooms.map(room => ({
       id: room.id,
       name: room.name,
@@ -23,6 +27,7 @@ export async function GET() {
       messageCount: room._count.messages
     }))
 
+    console.log('API: Returning rooms:', roomsWithCount)
     return NextResponse.json(roomsWithCount)
   } catch (error) {
     console.error('Error fetching chat rooms:', error)

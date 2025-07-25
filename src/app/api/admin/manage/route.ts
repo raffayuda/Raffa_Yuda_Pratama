@@ -6,13 +6,19 @@ const prisma = new PrismaClient()
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production'
 
 // Verify admin token
-async function verifyAdmin(request: NextRequest) {
+async function verifyAdmin(request: NextRequest, bodyToken?: string) {
+  let token = bodyToken
+  
+  // Try to get token from Authorization header first
   const authHeader = request.headers.get('authorization')
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  if (!token && authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.substring(7)
+  }
+  
+  if (!token) {
     return null
   }
 
-  const token = authHeader.substring(7)
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as any
     const admin = await prisma.admin.findUnique({
@@ -26,16 +32,21 @@ async function verifyAdmin(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const admin = await verifyAdmin(request)
+    const body = await request.json()
+    const { action, token } = body
+    console.log('Admin manage request:', { action, hasToken: !!token })
+    
+    const admin = await verifyAdmin(request, token)
     if (!admin) {
+      console.log('Admin verification failed')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-
-    const { action, data } = await request.json()
+    
+    console.log('Admin verified:', admin.username)
 
     switch (action) {
       case 'deleteMessage':
-        const { messageId } = data
+        const { messageId } = body
         
         await prisma.chatMessage.delete({
           where: { id: messageId }
@@ -44,29 +55,40 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: true })
 
       case 'createRoom':
-        const { name, description } = data
+        const { name, description } = body
+        
+        if (!name || !name.trim()) {
+          return NextResponse.json({ error: 'Room name is required' }, { status: 400 })
+        }
         
         const newRoom = await prisma.chatRoom.create({
-          data: { name, description }
+          data: { 
+            name: name.trim(), 
+            description: description?.trim() || null 
+          }
         })
 
         return NextResponse.json(newRoom)
 
       case 'updateRoom':
-        const { roomId, name: newName, description: newDescription } = data
+        const { roomId, name: newName, description: newDescription } = body
+        
+        if (!newName || !newName.trim()) {
+          return NextResponse.json({ error: 'Room name is required' }, { status: 400 })
+        }
         
         const updatedRoom = await prisma.chatRoom.update({
           where: { id: roomId },
           data: { 
-            name: newName, 
-            description: newDescription 
+            name: newName.trim(), 
+            description: newDescription?.trim() || null 
           }
         })
 
         return NextResponse.json(updatedRoom)
 
       case 'deleteRoom':
-        const { roomId: deleteRoomId } = data
+        const { roomId: deleteRoomId } = body
         
         // Delete room and all its messages (cascade)
         await prisma.chatRoom.delete({
@@ -76,7 +98,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: true })
 
       case 'getAllMessages':
-        const { roomId: getRoomId, limit = 100 } = data
+        const { roomId: getRoomId, limit = 100 } = body
         
         const messages = await prisma.chatMessage.findMany({
           where: getRoomId ? { roomId: getRoomId } : {},
@@ -87,7 +109,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(messages.reverse())
 
       case 'sendAdminMessage':
-        const { content, roomId: adminRoomId } = data
+        const { content, roomId: adminRoomId } = body
         
         const adminMessage = await prisma.chatMessage.create({
           data: {
