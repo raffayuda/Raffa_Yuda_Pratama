@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { sendContactEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,13 +33,12 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Send email notification
-    try {
-      await sendContactEmail({ name, email, subject, message })
-    } catch (emailError) {
-      console.error('Error sending email notification:', emailError)
-      // Don't fail the request if email fails, but log it
-    }
+    // Simulasi pengiriman email (log ke console)
+    console.log('📧 Contact form submission received:')
+    console.log('From:', name, '<' + email + '>')
+    console.log('Subject:', subject)
+    console.log('Message:', message)
+    console.log('Saved to database with ID:', contact.id)
 
     return NextResponse.json(
       { 

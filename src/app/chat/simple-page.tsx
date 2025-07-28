@@ -314,17 +314,17 @@ export default function SimpleChatPage() {
               <p className="text-gray-600 dark:text-gray-300">
                 {isReturningUser 
                   ? 'Good to see you again! Ready to continue chatting?' 
-                  : 'Connect with visitors and discuss projects in real-time'
+                  : 'Long Teks bareng Bang Boday'
                 }
               </p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Display Name *
+                   Nama Tampilan*
                 </label>
                 <Input
-                  placeholder="Enter your name"
+                  placeholder="Masukkan nama Anda"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   onKeyPress={handleKeyPress}
@@ -333,7 +333,7 @@ export default function SimpleChatPage() {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Email (Optional)
+                  Email (Opsional)
                 </label>
                 <Input
                   type="email"
