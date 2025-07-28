@@ -129,7 +129,7 @@ const Hero = () => {
               >
                 <Avatar className="w-64 h-64 md:w-80 md:h-80 border-4 border-primary/20 shadow-2xl">
                   <AvatarImage 
-                    src="/api/placeholder/320/320" 
+                    src="raffa.jpeg" 
                     alt="Profile picture"
                     className="object-cover"
                   />

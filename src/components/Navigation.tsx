@@ -43,7 +43,7 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold gradient-text">
-            {t('nav.portfolio')}
+            <img src="logo.png" alt="" width={50}/>
           </Link>
 
           {/* Desktop Navigation */}

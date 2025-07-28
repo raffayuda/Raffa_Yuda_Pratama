@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, ArrowLeft, Music, Clock } from 'lucide-react'
+import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, ArrowLeft, Music, Clock, Square } from 'lucide-react'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -126,6 +126,30 @@ export default function MusicPage() {
     }
   }, [currentSong])
 
+  // Cleanup on component unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.src = ''
+      }
+    }
+  }, [])
+
+  // Handle audio play/pause when isPlaying state changes
+  useEffect(() => {
+    if (audioRef.current && currentSong) {
+      if (isPlaying) {
+        audioRef.current.play().catch(error => {
+          console.error('Error playing audio:', error)
+          setIsPlaying(false)
+        })
+      } else {
+        audioRef.current.pause()
+      }
+    }
+  }, [isPlaying, currentSong])
+
   const playSong = (song: Song) => {
     setCurrentSong(song)
     setIsPlaying(true)
@@ -135,10 +159,21 @@ export default function MusicPage() {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause()
+        setIsPlaying(false)
       } else {
         audioRef.current.play()
+        setIsPlaying(true)
       }
-      setIsPlaying(!isPlaying)
+    }
+  }
+
+  const stopMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      setIsPlaying(false)
+      setCurrentTime(0)
+      setCurrentSong(null)
     }
   }
 
@@ -172,81 +207,82 @@ export default function MusicPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 mobile-scroll">
+      <div className="container mx-auto px-4 py-4 lg:py-8 pb-32 lg:pb-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-6 lg:mb-8"
         >
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-4 lg:mb-6">
             <Link href="/">
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="text-sm lg:text-base">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 {t('music.backToPortfolio')}
               </Button>
             </Link>
           </div>
           
-          <div className="text-center space-y-4">
-            <div className="mx-auto w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
-              <Music className="w-10 h-10 text-white" />
+          <div className="text-center space-y-3 lg:space-y-4">
+            <div className="mx-auto w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+              <Music className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               {t('music.title')}
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-sm lg:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
               {t('music.subtitle')}
             </p>
           </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        {/* Mobile Layout: Single Column */}
+        <div className="lg:grid lg:grid-cols-3 lg:gap-8">
           {/* Song List */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-2"
+            className="lg:col-span-2 mb-6 lg:mb-0"
           >
             <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-red-500" />
+              <CardHeader className="pb-3 lg:pb-6">
+                <CardTitle className="flex items-center gap-2 text-lg lg:text-xl">
+                  <Heart className="w-4 h-4 lg:w-5 lg:h-5 text-red-500" />
                   {t('music.favoriteTracks')} ({favoriteSongs.length})
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
+              <CardContent className="space-y-1 lg:space-y-2">
                 {favoriteSongs.map((song, index) => (
                   <motion.div
                     key={song.id}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className={`p-4 rounded-lg cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-gray-700 ${
+                    className={`p-3 lg:p-4 rounded-lg cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-gray-700 ${
                       currentSong?.id === song.id ? 'bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700' : ''
                     }`}
                     onClick={() => playSong(song)}
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 lg:gap-4">
                       <div className="relative">
                         <img
                           src={song.coverImage}
                           alt={`${song.title} cover`}
-                          className="w-12 h-12 rounded-lg object-cover"
+                          className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg object-cover"
                         />
                         {currentSong?.id === song.id && isPlaying && (
                           <div className="absolute inset-0 bg-black/30 rounded-lg flex items-center justify-center">
-                            <div className="w-3 h-3 bg-white rounded-full animate-pulse" />
+                            <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white rounded-full animate-pulse" />
                           </div>
                         )}
                       </div>
                       
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-gray-900 dark:text-white truncate">
+                        <h3 className="font-medium text-sm lg:text-base text-gray-900 dark:text-white truncate">
                           {song.title}
                         </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
+                        <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400 truncate">
                           {song.artist} • {song.album}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
@@ -257,9 +293,9 @@ export default function MusicPage() {
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-                        <Clock className="w-4 h-4" />
-                        <span className="text-sm">{song.duration}</span>
+                      <div className="flex items-center gap-1 lg:gap-2 text-gray-500 dark:text-gray-400">
+                        <Clock className="w-3 h-3 lg:w-4 lg:h-4" />
+                        <span className="text-xs lg:text-sm">{song.duration}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -268,11 +304,11 @@ export default function MusicPage() {
             </Card>
           </motion.div>
 
-          {/* Music Player */}
+          {/* Music Player - Hidden on mobile, shown in fixed bottom player */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-1"
+            className="hidden lg:block lg:col-span-1"
           >
             <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg sticky top-8">
               <CardHeader>
@@ -365,18 +401,17 @@ export default function MusicPage() {
                     </div>
 
                     {/* Audio Element */}
-                    <audio
-                      ref={audioRef}
-                      src={currentSong.audioUrl}
-                      autoPlay={isPlaying}
-                      onPlay={() => setIsPlaying(true)}
-                      onPause={() => setIsPlaying(false)}
-                      onLoadedData={() => {
-                        if (audioRef.current) {
-                          audioRef.current.volume = volume
-                        }
-                      }}
-                    />
+                    {currentSong && (
+                      <audio
+                        ref={audioRef}
+                        src={currentSong.audioUrl}
+                        onLoadedData={() => {
+                          if (audioRef.current) {
+                            audioRef.current.volume = volume
+                          }
+                        }}
+                      />
+                    )}
                   </>
                 ) : (
                   <div className="text-center py-12 text-gray-500 dark:text-gray-400">
@@ -389,6 +424,75 @@ export default function MusicPage() {
           </motion.div>
         </div>
       </div>
+
+      {/* Mobile Bottom Player */}
+      {currentSong && (
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed bottom-0 left-0 right-0 lg:hidden mobile-player bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg border-t border-gray-200 dark:border-gray-700 p-4 safe-area-pb"
+        >
+          <div className="space-y-3">
+            {/* Song Info & Controls */}
+            <div className="flex items-center gap-3">
+              <img
+                src={currentSong.coverImage}
+                alt={`${currentSong.title} cover`}
+                className="w-12 h-12 rounded-lg object-cover"
+              />
+              
+              <div className="flex-1 min-w-0">
+                <h3 className="font-medium text-sm text-gray-900 dark:text-white truncate">
+                  {currentSong.title}
+                </h3>
+                <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                  {currentSong.artist}
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handlePrevious}
+                  className="rounded-full p-2"
+                >
+                  <SkipBack className="w-4 h-4" />
+                </Button>
+                
+                <Button
+                  onClick={togglePlayPause}
+                  className="rounded-full w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700"
+                >
+                  {isPlaying ? (
+                    <Pause className="w-4 h-4" />
+                  ) : (
+                    <Play className="w-4 h-4 ml-0.5" />
+                  )}
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleNext}
+                  className="rounded-full p-2"
+                >
+                  <SkipForward className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="space-y-1">
+              <Progress value={(currentTime / duration) * 100} className="w-full h-1" />
+              <div className="flex justify-between text-xs text-gray-500">
+                <span>{formatTime(currentTime)}</span>
+                <span>{formatTime(duration)}</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
     </div>
   )
 }
