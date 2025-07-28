@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from "lucide-react"
 import { useLanguage } from "@/contexts/LanguageContext"
 
 const Contact = () => {
@@ -57,24 +57,25 @@ const Contact = () => {
     }
   }
 
-  const contactInfo = [
+  interface contactInfo {
+    icon: React.ComponentType<any>
+    label: string
+    value: string
+    href?: string
+  }
+
+  const contactInfo: contactInfo[] = [
     {
       icon: Mail,
       label: "Email",
-      value: "john.developer@example.com",
-      href: "mailto:john.developer@example.com"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+62 812-3456-7890",
-      href: "tel:+6281234567890"
+      value: "raffayudapratama20@gmail.com",
+      href: "mailto:raffayudapratama20@gmail.com"
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Jakarta, Indonesia",
-      href: "https://maps.google.com"
+      value: "Bogor, Indonesia",
+      href: undefined
     }
   ]
 
@@ -82,19 +83,19 @@ const Contact = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com/johndoe",
+      href: "https://github.com/raffayuda",
       color: "hover:text-gray-900"
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/johndoe",
+      href: "https://linkedin.com/in/raffa-yuda-pratama",
       color: "hover:text-blue-600"
     },
     {
-      icon: Twitter,
-      label: "Twitter",
-      href: "https://twitter.com/johndoe",
+      icon: Instagram,
+      label: "Instagram",
+      href: "https://www.instagram.com/raffayudapratama06",
       color: "hover:text-blue-400"
     }
   ]
@@ -302,28 +303,7 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            {/* Availability */}
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('contact.availability')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Freelance Projects</span>
-                    <Badge variant="default">Available</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Full-time Opportunities</span>
-                    <Badge variant="secondary">Open to discuss</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Response Time</span>
-                    <Badge variant="outline">Within 24 hours</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+           
           </motion.div>
         </div>
       </div>

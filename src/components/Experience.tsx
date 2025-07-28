@@ -11,71 +11,20 @@ const Experience = () => {
   const experiences = [
     {
       id: 1,
-      company: "TechCorp Solutions",
-      position: "Senior Full Stack Developer",
-      location: "Jakarta, Indonesia",
-      startDate: "Jan 2022",
-      endDate: "Present",
-      current: true,
-      description: "Leading development of enterprise web applications using React, Next.js, and Node.js. Mentoring junior developers and implementing best practices for code quality and performance optimization.",
-      achievements: [
-        "Improved application performance by 40% through code optimization",
-        "Led a team of 5 developers on multiple projects",
-        "Implemented CI/CD pipelines reducing deployment time by 60%",
-        "Architected microservices infrastructure serving 100k+ users"
-      ],
-      technologies: ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS", "Docker"]
-    },
-    {
-      id: 2,
-      company: "Digital Innovations Inc",
-      position: "Full Stack Developer",
-      location: "Bandung, Indonesia",
-      startDate: "Mar 2020",
-      endDate: "Dec 2021",
+      company: "IO Work",
+      position: "Junior Web Developer",
+      location: "Bogor, Indonesia",
+      startDate: "Mei 2023",
+      endDate: "August 2023",
       current: false,
-      description: "Developed and maintained multiple client projects including e-commerce platforms, content management systems, and mobile applications using modern web technologies.",
+      description: "Creating a simple company profile project using the CodeIgniter framework with team collaboration.",
       achievements: [
-        "Built 15+ successful web applications for various clients",
-        "Reduced bug reports by 50% through implementation of testing",
-        "Collaborated with design team to improve UX across projects",
-        "Mentored 3 junior developers and conducted code reviews"
+        "work together with the team to create a company profile project",
+        "Successfully delivered the project on time",
+        "Improved team collaboration and communication skills",
+        "Learned to use the CodeIgniter framework effectively"
       ],
-      technologies: ["React", "Vue.js", "Express.js", "MongoDB", "Firebase", "Tailwind CSS"]
-    },
-    {
-      id: 3,
-      company: "StartupHub",
-      position: "Frontend Developer",
-      location: "Yogyakarta, Indonesia",
-      startDate: "Jun 2019",
-      endDate: "Feb 2020",
-      current: false,
-      description: "Focused on creating responsive, user-friendly interfaces for web applications. Worked closely with UI/UX designers to implement pixel-perfect designs and improve user experience.",
-      achievements: [
-        "Converted 20+ Figma designs to responsive React components",
-        "Improved website loading speed by 35% through optimization",
-        "Implemented accessibility features following WCAG guidelines",
-        "Created reusable component library used across projects"
-      ],
-      technologies: ["React", "JavaScript", "HTML/CSS", "SASS", "Bootstrap", "jQuery"]
-    },
-    {
-      id: 4,
-      company: "Freelance",
-      position: "Web Developer",
-      location: "Remote",
-      startDate: "Jan 2019",
-      endDate: "May 2019",
-      current: false,
-      description: "Provided web development services to small businesses and startups. Created custom websites, landing pages, and simple web applications tailored to client needs.",
-      achievements: [
-        "Completed 10+ freelance projects with 5-star ratings",
-        "Delivered all projects on time and within budget",
-        "Established long-term relationships with 3 recurring clients",
-        "Learned project management and client communication skills"
-      ],
-      technologies: ["HTML", "CSS", "JavaScript", "WordPress", "PHP", "MySQL"]
+      technologies: ["React", "PHP", "CodeIgniter", "Bootstrap", "JavaScript"]
     }
   ]
 
@@ -113,7 +62,7 @@ const Experience = () => {
               )}
               
               {/* Timeline dot */}
-              <div className="absolute left-6 top-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-md" />
+              <div className="absolute left-6 top-10 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-md" />
 
               <Card className="ml-16 mb-8 hover:shadow-lg transition-shadow duration-300">
                 <CardHeader>
@@ -179,29 +128,7 @@ const Experience = () => {
           ))}
         </div>
 
-        {/* Call to action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <p className="text-muted-foreground mb-4">
-            Want to know more about my professional journey?
-          </p>
-          <a 
-            href="/resume.pdf" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
-          >
-            Download Full Resume
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </a>
-        </motion.div>
+        
       </div>
     </section>
   )

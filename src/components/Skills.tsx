@@ -48,9 +48,9 @@ const Skills = () => {
   ]
 
   const technologies = [
-    "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Express.js",
-    "Prisma", "PostgreSQL", "MongoDB", "Tailwind CSS", "Framer Motion",
-    "Git", "Docker", "Vercel", "AWS", "Figma"
+    "PHP", "Laravel", "React", "Next.js", "Node.js",
+    "Prisma", "PostgreSQL", "Tailwind CSS", "Framer Motion",
+    "Git","Vercel", "Figma", "Javascript", "TypeScript", "HTML", "CSS"
   ]
 
   return (
@@ -66,66 +66,9 @@ const Skills = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {t('skills.title').split(' ')[0]} <span className="gradient-text">{t('skills.title').split(' ')[1]}</span>
           </h2>
-          {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Technologies and tools I&apos;ve mastered to bring ideas to life.
-          </p> */}
+          
         </motion.div>
 
-        {/* Skills Grid */}
-        {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="text-2xl">{category.icon}</span>
-                    {category.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ 
-                          duration: 0.5, 
-                          delay: categoryIndex * 0.2 + skillIndex * 0.1 
-                        }}
-                        viewport={{ once: true }}
-                        className="space-y-2"
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="font-medium text-sm">{skill.name}</span>
-                          <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                        </div>
-                        <div className="w-full bg-muted rounded-full h-2">
-                          <motion.div
-                            className="bg-gradient-to-r from-primary to-primary/80 h-2 rounded-full"
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.level}%` }}
-                            transition={{ 
-                              duration: 1, 
-                              delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.5 
-                            }}
-                            viewport={{ once: true }}
-                          />
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div> */}
 
         {/* Technologies Tags */}
         <motion.div

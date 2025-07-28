@@ -16,26 +16,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "John Developer - Full Stack Developer Portfolio",
-    template: "%s | John Developer"
+    default: "Raffa Yuda Pratama - Portfolio",
+    template: "%s | Raffa Yuda Pratama - Portfolio",
   },
-  description: "Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js. View my projects, skills, and experience in modern web development.",
+  description: "Junior Web Developer",
   keywords: ["Full Stack Developer", "React", "Next.js", "TypeScript", "Node.js", "Web Development", "Portfolio"],
-  authors: [{ name: "John Developer" }],
-  creator: "John Developer",
+  authors: [{ name: "Raffa Yuda Pratama" }],
+  creator: "Raffa Yuda Pratama",
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://johndeveloper-portfolio.vercel.app",
-    title: "John Developer - Full Stack Developer Portfolio",
+    locale: "id_ID",
+    url: "https://raffayudapratama-portfolio.vercel.app",
+    title: "Raffa Yuda Pratama - Portfolio",
     description: "Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js",
-    siteName: "John Developer Portfolio",
+    siteName: "Raffa Yuda Pratama Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "John Developer - Full Stack Developer Portfolio",
+    title: "Raffa Yuda Pratama - Portfolio",
     description: "Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js",
-    creator: "@johndeveloper",
+    creator: "@raffayudapratama06",
   },
   robots: {
     index: true,

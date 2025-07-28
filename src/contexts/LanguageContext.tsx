@@ -29,18 +29,18 @@ const translations = {
     
     // Hero Section
     'hero.greeting': 'Hi, I am',
-    'hero.title': 'Full Stack Developer',
-    'hero.subtitle': 'I create amazing digital experiences with modern technologies',
+    'hero.title': 'Junior Web Developer',
+    'hero.subtitle': 'I am a male who supports the Spanish football club Barcelona FC. Visca Barca Visca Catalunya',
     'hero.cta': 'Get In Touch',
     'hero.downloadCV': 'Download CV',
     
     // About Section
     'about.title': 'About Me',
-    'about.subtitle': 'I\'m a passionate developer who loves creating digital experiences that make a difference.',
+    'about.subtitle': 'I\'m a passionate Junior Web Developer who loves creating digital experiences that make a difference.',
     'about.myStory': 'My Story',
-    'about.story1': 'Hi! I\'m John, a full-stack developer based in Indonesia. My journey into tech started 5 years ago when I discovered the magic of turning ideas into interactive digital experiences.',
-    'about.story2': 'I specialize in modern web technologies including React, Next.js, TypeScript, and Node.js. I\'m passionate about creating beautiful, performant applications that solve real-world problems.',
-    'about.story3': 'When I\'m not coding, you can find me exploring new technologies, contributing to open source, or enjoying a good cup of coffee while brainstorming the next big idea.',
+    'about.story1': 'Hi! I\'m Raffa Yuda Pratama, a junior web developer based in Indonesia. My journey into tech started 5 years ago when I discovered the magic of turning ideas into interactive digital experiences.',
+    'about.story2': 'During my time in vocational school, I learned the basics of programming such as PHP, JavaScript, and Java and started developing small projects. While in vocational school, I more often used PHP with the Laravel framework.',
+    'about.story3': 'After graduating, I tried other things besides using PHP and Laravel, I tried to deepen JavaScript with the Next.js and React.js frameworks by watching tutorials on YouTube and reading the official documentation.',
     'about.currentlyFocused': 'Currently focused on:',
     'about.whatIValue': 'What I Value',
     
@@ -48,7 +48,7 @@ const translations = {
     'about.stats.projectsCompleted': 'Projects Completed',
     'about.stats.happyClients': 'Happy Clients',
     'about.stats.yearsExperience': 'Years Experience',
-    'about.stats.cupsOfCoffee': 'Cups of Coffee',
+    'about.stats.cupsOfCoffee': 'Eat Rice',
     
     // Values
     'about.values.cleanCode.title': 'Clean Code',
@@ -69,10 +69,11 @@ const translations = {
     'skills.technologiesTitle': 'Technologies I Work With',
     
     // Projects Section
-    'projects.title': 'Featured Projects',
+    'projects.title': 'Latest Projects',
     'projects.subtitle': 'A showcase of my recent work and side projects that demonstrate my skills and passion for development.',
     'projects.viewProject': 'View Live Demo',
     'projects.viewCode': 'View Source Code',
+    'projects.comingSoon': 'Coming Soon',
     'projects.otherProjects': 'Other Projects',
     'projects.allProjects': 'All Projects',
     
@@ -84,7 +85,7 @@ const translations = {
     
     // Contact Section
     'contact.title': 'Get In Touch',
-    'contact.subtitle': 'Let\'s work together on your next project.',
+    'contact.subtitle': 'let\'s collaborate with each other',
     'contact.name': 'Your Name',
     'contact.email': 'Your Email',
     'contact.subject': 'Subject',
@@ -99,7 +100,7 @@ const translations = {
     
     // Music Page
     'music.title': 'My Favorite Songs',
-    'music.subtitle': 'A collection of my all-time favorite songs that inspire me while coding and designing.',
+    'music.subtitle': 'My favorite song collection when I\'m playing together and watching Barca.',
     'music.favoriteTracks': 'Favorite Tracks',
     'music.nowPlaying': 'Now Playing',
     'music.selectSong': 'Select a song to start playing',
@@ -153,18 +154,18 @@ const translations = {
     
     // Hero Section
     'hero.greeting': 'Halo, saya',
-    'hero.title': 'Full Stack Developer',
-    'hero.subtitle': 'Saya menciptakan pengalaman digital yang menakjubkan dengan teknologi modern',
+    'hero.title': 'Junior Web Developer',
+    'hero.subtitle': 'Saya seorang manusia berkelamin laki - laki yang mendukung club sepak bola asal Spanyol yaitu Barcelona FC. Visca Barca Visca Catalunya',
     'hero.cta': 'Hubungi Saya',
     'hero.downloadCV': 'Unduh CV',
     
     // About Section
     'about.title': 'Tentang Saya',
-    'about.subtitle': 'Saya adalah seorang developer yang bersemangat dan suka menciptakan pengalaman digital yang membuat perbedaan.',
+    'about.subtitle': 'Saya adalah seorang Junior Web developer yang bersemangat dan suka menciptakan pengalaman digital yang membuat perbedaan.',
     'about.myStory': 'Cerita Saya',
-    'about.story1': 'Halo! Saya John, seorang full-stack developer yang berbasis di Indonesia. Perjalanan saya ke dunia teknologi dimulai 5 tahun yang lalu ketika saya menemukan keajaiban mengubah ide menjadi pengalaman digital interaktif.',
-    'about.story2': 'Saya mengkhususkan diri dalam teknologi web modern termasuk React, Next.js, TypeScript, dan Node.js. Saya bersemangat menciptakan aplikasi yang indah dan berkinerja tinggi yang memecahkan masalah dunia nyata.',
-    'about.story3': 'Ketika saya tidak sedang coding, Anda bisa menemukan saya menjelajahi teknologi baru, berkontribusi pada open source, atau menikmati secangkir kopi yang enak sambil brainstorming ide besar berikutnya.',
+    'about.story1': 'Halo!, Saya Raffa Yuda Pratama, seorang junior web developer yang berasal dari Indonesia. Saya memulai apa itu coding dan lainnya dari saya SMK dan menurut saya itu cukup menarik.',
+    'about.story2': 'Selama di SMK, saya belajar dasar-dasar pemrograman seperti PHP, JavaScript, dan Java dan mulai mengembangkan proyek kecil. Selama di SMK saya lebih sering menggunakan PHP dengan framework Laravel',
+    'about.story3': 'Setelah lulus, saya mencoba hal lain selain menggunakan PHP dan Laravel, saya mencoba memperdalam Javascript dengan framework Next.js dan React.js dengan menonton tutorial di YouTube dan membaca dokumentasi resmi.',
     'about.currentlyFocused': 'Saat ini fokus pada:',
     'about.whatIValue': 'Yang Saya Hargai',
     
@@ -172,7 +173,7 @@ const translations = {
     'about.stats.projectsCompleted': 'Proyek Selesai',
     'about.stats.happyClients': 'Klien Puas',
     'about.stats.yearsExperience': 'Tahun Pengalaman',
-    'about.stats.cupsOfCoffee': 'Cangkir Kopi',
+    'about.stats.cupsOfCoffee': 'Makan Nasi',
     
     // Values
     'about.values.cleanCode.title': 'Kode Bersih',
@@ -193,10 +194,11 @@ const translations = {
     'skills.technologiesTitle': 'Teknologi yang Saya Gunakan',
     
     // Projects Section
-    'projects.title': 'Proyek Unggulan',
+    'projects.title': 'Proyek Terbaru',
     'projects.subtitle': 'Showcase karya terbaru dan proyek sampingan yang menunjukkan keahlian dan passion saya dalam pengembangan.',
     'projects.viewProject': 'Lihat Demo Live',
     'projects.viewCode': 'Lihat Source Code',
+    'projects.comingSoon': 'Segera Hadir',
     'projects.otherProjects': 'Proyek Lainnya',
     'projects.allProjects': 'Semua Proyek',
     
@@ -208,7 +210,7 @@ const translations = {
     
     // Contact Section
     'contact.title': 'Hubungi Saya',
-    'contact.subtitle': 'Mari bekerja sama dalam proyek selanjutnya.',
+    'contact.subtitle': 'Ayo kita saling berkolaborasi',
     'contact.name': 'Nama Anda',
     'contact.email': 'Email Anda',
     'contact.subject': 'Subjek',
@@ -223,7 +225,7 @@ const translations = {
     
     // Music Page
     'music.title': 'Lagu Favorit Saya',
-    'music.subtitle': 'Koleksi lagu favorit sepanjang masa yang menginspirasi saya saat coding dan mendesain.',
+    'music.subtitle': 'Koleksi lagu favorit saya ketika lagi mabar dan nonton Barca',
     'music.favoriteTracks': 'Lagu Favorit',
     'music.nowPlaying': 'Sedang Diputar',
     'music.selectSong': 'Pilih lagu untuk mulai memutar',

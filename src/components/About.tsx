@@ -9,9 +9,9 @@ import { useLanguage } from "@/contexts/LanguageContext"
 const About = () => {
   const { t } = useLanguage()
   const stats = [
-    { icon: Code, label: t('about.stats.projectsCompleted'), value: "50+", color: "text-blue-500" },
-    { icon: Palette, label: t('about.stats.happyClients'), value: "30+", color: "text-purple-500" },
-    { icon: Zap, label: t('about.stats.yearsExperience'), value: "5+", color: "text-green-500" },
+    { icon: Code, label: t('about.stats.projectsCompleted'), value: "10+", color: "text-blue-500" },
+    { icon: Palette, label: t('about.stats.happyClients'), value: "10+", color: "text-purple-500" },
+    { icon: Zap, label: t('about.stats.yearsExperience'), value: "3+", color: "text-green-500" },
     { icon: Heart, label: t('about.stats.cupsOfCoffee'), value: "∞", color: "text-red-500" },
   ]
 
@@ -76,7 +76,7 @@ const About = () => {
             <div className="mt-6 space-y-2">
               <h4 className="font-semibold text-lg">{t('about.currentlyFocused')}</h4>
               <div className="flex flex-wrap gap-2">
-                {["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "Framer Motion"].map((tech) => (
+                {["Next.js", "TypeScript", "Prisma", "PostgreSQL"].map((tech) => (
                   <Badge key={tech} variant="secondary">
                     {tech}
                   </Badge>

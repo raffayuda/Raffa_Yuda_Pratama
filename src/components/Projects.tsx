@@ -13,32 +13,32 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce platform with modern UI, payment integration, and admin dashboard. Built with Next.js, Prisma, and PostgreSQL.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Stripe", "Tailwind CSS"],
-      githubUrl: "https://github.com/johndoe/ecommerce",
-      liveUrl: "https://ecommerce-demo.vercel.app",
+      title: "Vocabulary-English",
+      description: "A web application for learning English vocabulary through interactive quizzes and flashcards.",
+      image: "projek1.png",
+      technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS"],
+      githubUrl: "https://github.com/raffayuda/vocabulary-english",
+      liveUrl: "https://vocabulary-english.vercel.app/",
       featured: true
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      image: "/api/placeholder/400/250",
-      technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Express.js"],
+      title: "Attendance App",
+      description: "A web application for managing attendance with features like QR code scanning, real-time updates, and detailed reports.",
+      image: "projek2.png",
+      technologies: ["Laravel", "PHP", "Mysql", "Tailwind CSS", "Livewire"],
       githubUrl: "https://github.com/johndoe/taskmanager",
-      liveUrl: "https://taskmanager-demo.vercel.app",
+      liveUrl: null, // No live demo available
       featured: true
     },
     {
       id: 3,
-      title: "Weather Dashboard",
-      description: "A responsive weather dashboard with location-based forecasts, interactive maps, and weather alerts using third-party APIs.",
-      image: "/api/placeholder/400/250",
-      technologies: ["React", "TypeScript", "OpenWeather API", "Chart.js", "CSS Modules"],
-      githubUrl: "https://github.com/johndoe/weather-app",
-      liveUrl: "https://weather-dashboard-demo.vercel.app",
+      title: "Faskes",
+      description: "A web application for managing health facilities with features like appointment scheduling, patient management, and billing.",
+      image: "projek3.png",
+      technologies: ["Laravel", "Livewire", "Tailwind CSS", "Mysql", "Filament"],
+      githubUrl: "https://github.com/raffayuda/faskes-laravel",
+      liveUrl: null,
       featured: false
     },
     {
@@ -48,27 +48,27 @@ const Projects = () => {
       image: "/api/placeholder/400/250",
       technologies: ["Next.js", "Framer Motion", "Tailwind CSS", "Prisma", "PostgreSQL"],
       githubUrl: "https://github.com/johndoe/portfolio",
-      liveUrl: "https://johndoe-portfolio.vercel.app",
+      liveUrl: null, // In development
       featured: false
     },
     {
       id: 5,
-      title: "Social Media Dashboard",
-      description: "Analytics dashboard for social media management with data visualization, scheduled posts, and engagement tracking.",
+      title: "Quiz App",
+      description: "A web application for creating and taking quizzes with features like real-time results, and analytics.",
       image: "/api/placeholder/400/250",
-      technologies: ["React", "D3.js", "Node.js", "Express.js", "MongoDB", "Redis"],
-      githubUrl: "https://github.com/johndoe/social-dashboard",
-      liveUrl: "https://social-dashboard-demo.vercel.app",
+      technologies: ["React", "Typescript", "Node.js", "Tailwind CSS"],
+      githubUrl: "https://github.com/raffayuda/quizz-app",
+      liveUrl: null,
       featured: false
     },
     {
       id: 6,
-      title: "Learning Management System",
-      description: "A comprehensive LMS with course creation, progress tracking, video streaming, and assessment tools for online education.",
-      image: "/api/placeholder/400/250",
-      technologies: ["Next.js", "Prisma", "PostgreSQL", "AWS S3", "Stripe", "TypeScript"],
-      githubUrl: "https://github.com/johndoe/lms",
-      liveUrl: "https://lms-demo.vercel.app",
+      title: "Rent Car App",
+      description: "A web application for managing car rentals with features like booking, payment processing, and user management.",
+      image: "projek3.png",
+      technologies: ["Laravel", "Alpine.js", "Tailwind CSS", "Mysql", "Filament"],
+      githubUrl: "https://github.com/raffayuda/projek-uas",
+      liveUrl: null, // Private project
       featured: true
     }
   ]
@@ -106,7 +106,7 @@ const Projects = () => {
             >
               <Card className="h-full hover:shadow-lg transition-all duration-300 group overflow-hidden">
                 <div className="relative overflow-hidden">
-                  <Image
+                  <img
                     src={project.image}
                     alt={project.title}
                     width={400}
@@ -115,12 +115,14 @@ const Projects = () => {
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="flex gap-4">
-                      <Button size="sm" variant="secondary" asChild>
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                          <Eye className="h-4 w-4 mr-2" />
-                          {t('projects.viewProject')}
-                        </a>
-                      </Button>
+                      {project.liveUrl && (
+                        <Button size="sm" variant="secondary" asChild>
+                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                            <Eye className="h-4 w-4 mr-2" />
+                            {t('projects.viewProject')}
+                          </a>
+                        </Button>
+                      )}
                       <Button size="sm" variant="outline" asChild>
                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                           <Github className="h-4 w-4 mr-2" />
@@ -152,12 +154,16 @@ const Projects = () => {
                 </CardContent>
 
                 <CardFooter className="flex gap-2">
-                  <Button size="sm" asChild className="flex-1">
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      {t('projects.viewProject')}
-                    </a>
-                  </Button>
+                  {project.liveUrl ? (
+                    <Button size="sm" asChild className="flex-1">
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        {t('projects.viewProject')}
+                      </a>
+                    </Button>
+                  ) : (
+                    ''
+                  )}
                   <Button size="sm" variant="outline" asChild className="flex-1">
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
@@ -187,7 +193,7 @@ const Projects = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300 relative min-h-[300px]">
                   <CardHeader>
                     <CardTitle className="text-lg">{project.title}</CardTitle>
                     <CardDescription className="text-sm">
@@ -210,14 +216,18 @@ const Projects = () => {
                     </div>
                   </CardContent>
 
-                  <CardFooter className="flex gap-2">
-                    <Button size="sm" variant="outline" asChild className="flex-1">
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-3 w-3 mr-1" />
-                        Demo
-                      </a>
-                    </Button>
-                    <Button size="sm" variant="outline" asChild className="flex-1">
+                  <CardFooter className="flex gap-2 absolute bottom-0">
+                    {project.liveUrl ? (
+                      <Button size="sm" variant="outline" asChild className="flex-1">
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          Demo
+                        </a>
+                      </Button>
+                    ) : (
+                      ''
+                    )}
+                    <Button size="sm" variant="outline" asChild className="flex-1 ">
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                         <Github className="h-3 w-3 mr-1" />
                         Code

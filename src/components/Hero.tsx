@@ -54,7 +54,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <span className="gradient-text">John Developer</span>
+              <span className="gradient-text">Raffa Yuda Pratama</span>
             </motion.h1>
 
             <motion.div
@@ -89,7 +89,7 @@ const Hero = () => {
               
               <Button variant="outline" size="lg" className="group">
                 <Download className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
-                {t('hero.downloadCV')}
+                <a href="CV_Raffa Yuda Pratama.pdf" download>{t('hero.downloadCV')}</a>
               </Button>
             </motion.div>
 

@@ -83,17 +83,17 @@ const Navigation = () => {
             {/* Social Links - Hidden on mobile */}
             <div className="hidden md:flex items-center space-x-3">
               <Button variant="ghost" size="icon" asChild>
-                <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+                <Link href="https://github.com/raffayuda" target="_blank" rel="noopener noreferrer">
                   <Github className="h-5 w-5" />
                 </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <Link href="https://www.linkedin.com/in/raffa-yuda-pratama/" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-5 w-5" />
                 </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <Link href="mailto:your.email@example.com">
+                <Link href="mailto:raffayudapratama20@gmail.com">
                   <Mail className="h-5 w-5" />
                 </Link>
               </Button>
