@@ -21,9 +21,9 @@ const Footer = () => {
       { name: "Contact", href: "#contact" },
     ],
     social: [
-      { name: "GitHub", href: "https://github.com/johndoe", icon: Github },
-      { name: "LinkedIn", href: "https://linkedin.com/in/johndoe", icon: Linkedin },
-      { name: "Email", href: "mailto:john.developer@example.com", icon: Mail },
+      { name: "GitHub", href: "https://github.com/raffayuda", icon: Github },
+      { name: "LinkedIn", href: "https://linkedin.com/in/raffa-yuda-pratama", icon: Linkedin },
+      { name: "Email", href: "mailto:raffayudapratama20@gmail.com", icon: Mail },
     ]
   }
 
@@ -73,25 +73,12 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Services */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Services</h3>
-            <nav className="flex flex-col space-y-2">
-              <span className="text-muted-foreground text-sm">Web Development</span>
-              <span className="text-muted-foreground text-sm">Frontend Development</span>
-              <span className="text-muted-foreground text-sm">Backend Development</span>
-              <span className="text-muted-foreground text-sm">UI/UX Design</span>
-              <span className="text-muted-foreground text-sm">Consulting</span>
-            </nav>
-          </div>
-
           {/* Contact Info */}
           <div className="space-y-4">
             <h3 className="font-semibold">Get In Touch</h3>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p>Jakarta, Indonesia</p>
-              <p>john.developer@example.com</p>
-              <p>+62 812-3456-7890</p>
+              <p>Bogor, Indonesia</p>
+              <p>raffayudapratama20@gmail.com</p>
             </div>
             <Button size="sm" asChild>
               <Link href="#contact">
@@ -104,9 +91,9 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>© {currentYear} John Developer. Made with</span>
+            <span>© {currentYear} Raffa Yuda Pratama. Made with</span>
             <Heart className="h-4 w-4 text-red-500 fill-current" />
-            <span>using Next.js & Tailwind CSS</span>
+            <span>Homemade</span>
           </div>
 
           <Button
