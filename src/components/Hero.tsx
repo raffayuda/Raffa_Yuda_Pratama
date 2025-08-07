@@ -134,7 +134,7 @@ const Hero = () => {
                     className="object-cover"
                   />
                   <AvatarFallback className="text-4xl font-bold bg-gradient-to-br from-primary/20 to-secondary/20">
-                    JD
+                    RA
                   </AvatarFallback>
                 </Avatar>
               </motion.div>
