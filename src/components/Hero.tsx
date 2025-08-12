@@ -99,12 +99,16 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
-              <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
+              <a href="https://github.com/raffayuda">
+              <Button variant="ghost" size="icon" className="hover:scale-110 cursor-pointer transition-transform">
                 <Github className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform">
-                <Linkedin className="h-5 w-5" />
-              </Button>
+              </a>
+              <a href="https://www.linkedin.com/in/raffa-yuda-pratama/">
+                <Button variant="ghost" size="icon" className="hover:scale-110 cursor-pointer transition-transform">
+                  <Linkedin className="h-5 w-5" />
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
 
